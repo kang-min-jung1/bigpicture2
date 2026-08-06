@@ -1,0 +1,475 @@
+/* ========================
+   CSS RESET & BASE
+======================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-accent: #111111;
+  --color-tab-active-bg: #111111;
+  --color-tab-active-text: #ffffff;
+  --color-tab-inactive: #555555;
+  --color-overlay: rgba(0, 0, 0, 0.18);
+  --header-height: 70px;
+  --gap: 8px;
+  --font-main:
+    "Helvetica Neue", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  min-height: 100vh;
+}
+
+/* ========================
+   HEADER
+======================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 40px;
+  background: var(--color-bg);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 36px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  position: relative;
+  transition: opacity 0.2s;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-text);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  opacity: 0.6;
+}
+
+/* 햄버거 버튼 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ========================
+   모바일 메뉴
+======================== */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background: var(--color-bg);
+  z-index: 99;
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+
+.mobile-menu.open {
+  max-height: 300px;
+}
+
+.mobile-nav-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 18px 0;
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.mobile-nav-link:last-child { border-bottom: none; }
+.mobile-nav-link:hover { background: #f8f8f8; }
+
+/* ========================
+   PORTFOLIO MAIN
+======================== */
+.portfolio-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+/* ========================
+   TAB BAR
+======================== */
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 36px;
+}
+
+.tab-btn {
+  padding: 10px 22px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-tab-inactive);
+  font-size: 13px;
+  font-family: var(--font-main);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.tab-btn:hover {
+  border-color: #aaa;
+  color: #111;
+}
+
+.tab-btn.active {
+  background: var(--color-tab-active-bg);
+  color: var(--color-tab-active-text);
+  border-color: var(--color-tab-active-bg);
+}
+
+/* ========================
+   GALLERY GRID
+======================== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  animation: fadeIn 0.3s ease;
+}
+
+.gallery.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================
+   GALLERY ITEM
+======================== */
+.gallery-item {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: transparent; /* 회색 박스 제거 */
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+
+/* ========================
+   FOOTER
+======================== */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   padding: 30px 20px 30px;
+  border-top: 1px solid #eeeeee;
+  text-align: center;
+  gap: 0;
+  background: #f5f5f5; 
+}
+
+.footer-top-btn {
+  display: inline-block;
+  font-size: 13px;
+  color: #555555;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  margin-bottom: 36px;
+  transition: color 0.2s;
+}
+
+.footer-top-btn:hover {
+  color: #111111;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.footer-blog-link {
+  display: inline-flex;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.footer-blog-link:hover {
+  opacity: 0.75;
+  transform: translateY(-2px);
+}
+
+.footer-blog-link svg {
+  width: 34px;
+  height: 34px;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 24px;
+}
+
+.footer-info p {
+  font-size: 13px;
+  color: #777777;
+  line-height: 1.7;
+}
+
+.footer-divider {
+  color: #cccccc;
+  margin: 2px 0;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: #aaaaaa;
+}
+/* ========================
+   반응형 (모바일)
+   기존 css/portfolio/style.css 맨 아래에 붙여넣으세요
+======================== */
+
+@media (max-width: 768px) {
+  /* 햄버거 버튼 보이기 */
+  .hamburger {
+    display: flex;
+  }
+
+  /* 데스크톱 nav 숨기기 */
+  .nav {
+    display: none;
+  }
+
+  /* 모바일 메뉴 flex로 전환 (max-height 애니메이션 활성화) */
+  .mobile-menu {
+    display: flex;
+  }
+
+  /* 헤더 패딩 줄이기 */
+  .header {
+    padding: 0 20px;
+  }
+
+  /* 갤러리 2열로 변경 */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 포트폴리오 패딩 조정 */
+  .portfolio-main {
+    padding: 32px 16px 60px;
+  }
+
+  /* 탭 버튼 작게 */
+  .tab-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 아주 작은 화면은 1열 */
+  .gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .tab-bar {
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+/* ========================
+   플로팅 버튼
+======================== */
+.floating-buttons {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  z-index: 999;
+}
+
+.floating-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 200px;             /* 두 버튼 가로폭 통일 */
+  padding: 16px 20px;       /* 아이콘 대비 여유 있게 박스 확대 */
+  border-radius: 50px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  animation: floatBob 2.6s ease-in-out infinite;
+  transition: transform 0.2s;
+}
+
+.floating-btn:hover {
+  transform: scale(1.05);
+}
+
+.floating-call {
+  background: #111111;
+}
+
+.floating-kakao {
+  background: #fee500;
+  animation-delay: 0.3s;
+}
+
+.floating-btn svg {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.floating-label {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.floating-call .floating-label {
+  color: #ffffff;
+}
+
+.floating-kakao .floating-label {
+  color: #3c1e1e;
+}
+
+@keyframes floatBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (max-width: 767px) {
+  .floating-buttons {
+    right: 16px;
+    bottom: 16px;
+    gap: 10px;
+  }
+  .floating-btn {
+    width: 150px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .floating-btn svg {
+    width: 34px;
+    height: 34px;
+  }
+  .floating-label {
+    font-size: 13px;
+  }
+}

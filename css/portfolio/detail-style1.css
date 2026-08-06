@@ -1,0 +1,370 @@
+/* ========================
+   DETAIL PAGE STYLES
+   파일 위치: css/detail/style.css
+======================== */
+
+/* ——— 뒤로가기 링크 ——— */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #888;
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: color 0.2s, gap 0.2s;
+}
+
+.back-link:hover {
+  color: #111;
+  gap: 10px;
+}
+
+/* ——— 메인 레이아웃 ——— */
+.detail-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 32px 100px;
+}
+
+/* ——— 프로젝트 헤더 ——— */
+.detail-header {
+  margin-bottom: 52px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.detail-title {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 28px;
+  line-height: 1.2;
+}
+
+/* ——— 프로젝트 메타 정보 ——— */
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 28px;
+}
+
+.meta-item:first-child {
+  padding-left: 0;
+}
+
+.meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.meta-value {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #222;
+  letter-spacing: 0.01em;
+}
+
+.meta-divider {
+  width: 1px;
+  height: 36px;
+  background: #e0e0e0;
+  flex-shrink: 0;
+}
+
+/* ——— 이미지 갤러리 ——— */
+.detail-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 72px;
+}
+
+.detail-img-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: zoom-in;
+}
+
+.detail-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.detail-img-wrap img.loaded {
+  opacity: 1;
+}
+
+.detail-img-wrap:hover img {
+  transform: scale(1.02);
+}
+
+/* ——— 라이트박스 ——— */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-img-wrap {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img-wrap img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  z-index: 1000;
+}
+
+.lightbox-close:hover { opacity: 1; }
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, background 0.2s;
+  z-index: 1000;
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ——— 이전/다음 네비게이션 ——— */
+.detail-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  padding-top: 40px;
+  border-top: 1px solid #eeeeee;
+}
+
+.detail-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #333;
+  padding: 16px 0;
+  transition: color 0.2s;
+  max-width: 45%;
+}
+
+.detail-nav-link:hover {
+  color: #111;
+}
+
+.detail-nav-link.next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.detail-nav-link.next .detail-nav-text {
+  align-items: flex-end;
+}
+
+.detail-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.detail-nav-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.detail-nav-link svg {
+  flex-shrink: 0;
+  color: #aaa;
+  transition: color 0.2s;
+}
+
+.detail-nav-link:hover svg {
+  color: #111;
+}
+
+/* ——— 반응형 ——— */
+@media (max-width: 768px) {
+  .detail-main {
+    padding: 32px 20px 80px;
+  }
+
+  .detail-meta {
+    gap: 20px;
+  }
+
+  .meta-divider {
+    display: none;
+  }
+
+  .meta-item {
+    padding: 0;
+  }
+
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+
+  .lightbox-prev,
+  .lightbox-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .detail-nav {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .detail-nav-link {
+    max-width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .detail-nav-link.next {
+    margin-left: 0;
+    text-align: left;
+    flex-direction: row-reverse;
+  }
+
+  .detail-nav-link.next .detail-nav-text {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-link {
+    margin-bottom: 28px;
+  }
+
+  .detail-header {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+  }
+}
+/* ========================
+   반응형 (모바일)
+   기존 css/portfolio/style.css 맨 아래에 붙여넣으세요
+======================== */
+
+@media (max-width: 768px) {
+  /* 햄버거 버튼 보이기 */
+  .hamburger {
+    display: flex;
+  }
+
+  /* 데스크톱 nav 숨기기 */
+  .nav {
+    display: none;
+  }
+
+  /* 모바일 메뉴 flex로 전환 (max-height 애니메이션 활성화) */
+  .mobile-menu {
+    display: flex;
+  }
+
+  /* 헤더 패딩 줄이기 */
+  .header {
+    padding: 0 20px;
+  }
+
+  /* 갤러리 2열로 변경 */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 포트폴리오 패딩 조정 */
+  .portfolio-main {
+    padding: 32px 16px 60px;
+  }
+
+  /* 탭 버튼 작게 */
+  .tab-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 아주 작은 화면은 1열 */
+  .gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .tab-bar {
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
